@@ -1154,3 +1154,20 @@ flags_reset()
 
   unset flags_name_ flags_type_ flags_strToEval_ flags_usName_
 }
+
+flags_die() {
+  [ "$#" -gt 0 ] && echo "error: $@" >&2
+  flags_help
+  exit 1
+}
+
+flags_has() {
+  local ret="1"
+
+  [ "$1" ] || return "$ret"
+  [ "$1" -eq "${FLAGS_FALSE}" ] && return "$ret"
+
+  ret="0"
+  return "$ret"
+}
+
